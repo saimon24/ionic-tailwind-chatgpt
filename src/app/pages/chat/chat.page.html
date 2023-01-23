@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar class="bg-gray-900 text-white">
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-menu-button> </ion-menu-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>My chat title</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div
+    *ngFor="let msg of messages | async"
+    class="flex gap-4 p-6 border-b border-black/10 text-gray-800"
+    [ngClass]="{'bg-gray-50': msg.from === 1 }"
+  >
+    <img *ngIf="msg.from === 0" src="assets/simon.png" class="w-8 h-8" />
+    <img *ngIf="msg.from === 1" src="assets/bot.jpg" class="w-8 h-8" />
+
+    <p>{{ msg.text}}</p>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="m-2 relative flex h-full flex-1 md:flex-col">
+      <div class="flex p-1.5">
+        <img src="assets/simon.png" class="w-8 h-8" />
+      </div>
+      <div
+        [formGroup]="inputForm"
+        class="flex flex-col w-full py-2 flex-grow md:py-3 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-md shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:shadow-[0_0_15px_rgba(0,0,0,0.10)]"
+      >
+        <textarea
+          formControlName="prompt"
+          rows="1"
+          placeholder=""
+          class="m-0 w-full resize-none border-0 bg-transparent p-0 pl-2 pr-7 focus:ring-0 focus-visible:ring-0 dark:bg-transparent md:pl-0"
+        ></textarea
+        ><button
+          (click)="submitPrompt()"
+          class="absolute p-1 rounded-md text-gray-500 bottom-1.5 right-1 md:bottom-2.5 md:right-2 hover:bg-gray-100 dark:hover:text-gray-400 dark:hover:bg-gray-900 disabled:hover:bg-transparent dark:disabled:hover:bg-transparent"
+        >
+          <ion-icon name="send"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

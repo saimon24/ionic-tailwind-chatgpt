@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  OPENAI_API_KEY: '',
 };
